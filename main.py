@@ -61,6 +61,7 @@ def gettop3(matrix_norm, query_norm):
     GREEN  = "\033[32m"
     BOLD   = "\033[1m"
     RESET  = "\033[0m"
+    pd.set_option('display.max_colwidth', None)
     scores = torch.matmul(matrix_norm, query_norm.T).squeeze()
     topk_scores, topk_indices = torch.topk(scores, k=3)
     print(f"\n{CYAN}=== SEARCH RESULTS ==={RESET}")
@@ -69,9 +70,11 @@ def gettop3(matrix_norm, query_norm):
         score = topk_scores[rank].item()
         matching_text = df.iloc[row_index]['text']
         article_title = df.iloc[row_index]['title']
+        url = df.iloc[row_index]['url']
 
         print(f"\n{PINK}[#{rank+1}]{RESET} {BOLD}{article_title}{RESET} (Score: {GREEN}{score:.4f}{RESET})")
         print(f"{matching_text}")
+        print(f"{url}")
         print(f"{CYAN}--------------------------------------------------{RESET}")
 
 
@@ -83,7 +86,6 @@ for i, line in enumerate(logo_lines):
 while True:
 
     user_input = input(f"{PINK}{BOLD}wikispeedia{RESET} {BLUE}❯{RESET} ")
-    
     if user_input.strip().lower() == 'exit':
         print(f"\n\033[31m\033[1mGoodbye!\033[0m\n")
         break
