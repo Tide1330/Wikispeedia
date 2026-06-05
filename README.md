@@ -1,39 +1,57 @@
-$$\      $$\ $$\ $$\       $$\                                               $$\ $$\           
-$$ | $\  $$ |\__|$$ |      \__|                                              $$ |\__|          
-$$ |$$$\ $$ |$$\ $$ |  $$\ $$\  $$$$$$$\  $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$$ |$$\  $$$$$$\  
-$$ $$ $$\$$ |$$ |$$ | $$  |$$ |$$  _____|$$  __$$\ $$  __$$\ $$  __$$\ $$  __$$ |$$ | \____$$\ 
+```text
+$$\      $$\ $$\ $$\       $$\
+$$ | $\  $$ |\__|$$ |      \__|
+$$ |$$$\ $$ |$$\ $$ |  $$\ $$\  $$$$$$$\  $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$$ |$$\  $$$$$$\
+$$ $$ $$\$$ |$$ |$$ | $$  |$$ |$$  _____|$$  __$$\ $$  __$$\ $$  __$$\ $$  __$$ |$$ | \____$$\
 $$$$  _$$$$ |$$ |$$$$$$  / $$ |\$$$$$$\  $$ /  $$ |$$$$$$$$ |$$$$$$$$ |$$ /  $$ |$$ | $$$$$$$ |
 $$$  / \$$$ |$$ |$$  _$$<  $$ | \____$$\ $$ |  $$ |$$   ____|$$   ____|$$ |  $$ |$$ |$$  __$$ |
 $$  /   \$$ |$$ |$$ | \$$\ $$ |$$$$$$$  |$$$$$$$  |\$$$$$$$\ \$$$$$$$\ \$$$$$$$ |$$ |\$$$$$$$ |
 \__/     \__|\__|\__|  \__|\__|\_______/ $$  ____/  \_______| \_______| \_______|\__| \_______|
-                                         $$ |                                                  
-                                         $$ |                                                  
-                                         \__|                                                  
+                                         $$ |
+                                         $$ |
+                                         \__|
+```
 
-An AI-powered semantic search engine that indexes 1,000+ Wikipedia articles and retrieves results based on meaning rather than exact keyword matches.
+# Wikispeedia
 
-Using transformer embeddings and PyTorch vector search, Wikispeedia maps text into a 384-dimensional semantic space, allowing it to understand conceptual relationships between terms. For example, a search for **"feline"** can return articles discussing **"cats"** even when the word *feline* never appears in the text.
+### Semantic Search for Wikipedia Using Transformer Embeddings
+
+---
+
+## Overview
+
+Wikispeedia is a semantic search engine that indexes **1,000+ Wikipedia articles** and retrieves results based on **contextual meaning** rather than exact keyword matches.
+
+Using transformer embeddings and PyTorch vector search, the engine maps text into a **384-dimensional semantic space**, allowing conceptually related content to be discovered even when the query terms never appear in the source text.
+
+> Query: `feline`
+> Result: Documents discussing `cats`
+
+---
 
 ## Features
 
 * Semantic search powered by transformer embeddings
-* Indexes 1,000 Wikipedia articles
+* Indexes 1,000+ Wikipedia articles
 * Fast vector similarity search using PyTorch
 * Cosine similarity ranking across the entire corpus
-* Pre-computed embeddings for instant querying
+* Pre-computed embeddings for immediate use
+
+---
 
 ## How It Works
 
 1. Wikipedia articles are cleaned and split into text chunks.
-2. Each chunk is converted into a 384-dimensional embedding using `all-MiniLM-L6-v2`.
+2. Each chunk is encoded using `all-MiniLM-L6-v2`.
 3. Queries are embedded into the same vector space.
-4. Cosine similarity retrieves the most semantically relevant results.
+4. Cosine similarity ranks the most relevant chunks.
+5. The highest-scoring results are returned to the user.
+
+---
 
 ## Getting Started
 
 ### Prerequisites
-
-Python 3.8+
 
 ```bash
 pip install -r requirements.txt
@@ -41,11 +59,13 @@ pip install -r requirements.txt
 
 ### Run
 
-Pre-computed embeddings and processed data are included in the `data/` folder.
+Pre-computed embeddings and the processed dataset are included in the `data/` directory.
 
 ```bash
 python main.py
 ```
+
+---
 
 ## Project Structure
 
@@ -54,8 +74,16 @@ python main.py
 │   ├── dataset.pkl
 │   └── finalembed.pt
 ├── onetimescripts/
+│   ├── fetchdata.py
+│   ├── cleandata.py
+│   └── getembed.py
 ├── main.py
 ├── requirements.txt
 └── README.md
 ```
 
+---
+
+### Built With
+
+PyTorch • Hugging face
